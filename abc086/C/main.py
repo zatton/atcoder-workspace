@@ -5,7 +5,18 @@ YES = "Yes"  # type: str
 NO = "No"  # type: str
 
 
-def solve(N: int, t: "List[int]", x: "List[int]", y: "List[int]"):
+def solve(N: int, T: "List[int]", X: "List[int]", Y: "List[int]"):
+    last = [0, 0]
+    last_t = 0
+    for t, x, y in zip(T, X, Y):
+        dis = abs(x - last[0]) + abs(y - last[1])
+        span = t - last_t
+        if not (span >= dis and (span - dis) % 2 == 0):
+            print(NO)
+            return
+        last_t = t
+        last = [x, y]
+    print(YES)
     return
 
 
