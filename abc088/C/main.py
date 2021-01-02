@@ -6,6 +6,20 @@ NO = "No"  # type: str
 
 
 def solve(c: "List[List[int]]"):
+    cases = [(0, 1), (1, 2), (2, 0)]
+    for case in cases:
+        tmp = (c[0][case[0]] - c[0][case[1]])
+        for i in range(1, 3):
+            if not tmp == (c[i][case[0]] - c[i][case[1]]):
+                print(NO)
+                return
+    for case in cases:
+        tmp = (c[case[0]][0] - c[case[1]][0])
+        for i in range(1, 3):
+            if not tmp == (c[case[0]][i] - c[case[1]][i]):
+                print(NO)
+                return
+    print(YES)
     return
 
 
