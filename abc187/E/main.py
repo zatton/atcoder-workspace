@@ -2,6 +2,46 @@
 import sys
 
 def solve(N: int, a: "List[int]", b: "List[int]", Q: int, t: "List[int]", e: "List[int]", x: "List[int]"):
+    nei = [[] for _ in range(N + 1)]
+    nei[0] = [1]
+    for i in range(N - 1):
+        nei[a[i]].append(b[i])
+        nei[b[i]].append(a[i])
+    que = [0]
+    dep = [-1] * (N + 1)
+    dep[0] = 0
+    print(nei)
+    while que:
+        now = que.pop()
+        for po in nei[now]:
+            if dep[po] < 0:
+                dep[po] = dep[now] + 1
+                que.append(po)
+    s = [0] * (N + 1)
+    for i in range(Q):
+        T, E, X = t[i], e[i], x[i]
+        A, B = a[E - 1], b[E - 1]
+        if dep[A] < dep[B]:
+            A, B = B, A
+            T = 1 if T == 2 else 2
+        if T == 1:
+            s[B] = X
+        else:
+            s[0] = X
+            s[B] = -X
+    print(s)
+    print(dep)
+    que = [0]
+    ans = [0] * (N + 1)
+    while que:
+        now = que.pop()
+        for po in nei[now]:
+            if dep[po] > dep[now]:
+                ans[po] += (ans[now] + s[now])
+                que.append(po)
+    for i in range(1, N + 1):
+        print(ans[i])
+
     return
 
 
