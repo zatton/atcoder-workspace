@@ -1,31 +1,11 @@
 #!/usr/bin/env python3
 import sys
-import math
 
-def gcd(a, b):
-    if b > a:
-        a, b = b, a
-    if b == 0:
-        return a
-    return gcd(b, a % b)
+MOD = 1000000007  # type: int
 
 
-def solve(A: int, B: int):
-    g = gcd(A, B)
-    i = 2
-    last = int(math.sqrt(g))
-    s = {1}
-    while True:
-        #print(g, i)
-        if g % i == 0:
-            s.add(i)
-            g //= i
-        else:
-            i += 1
-        if i > last:
-            s.add(g)
-            break
-    print(len(s))
+def solve(H: int, W: int, A: int, B: int):
+    print()
     return
 
 
@@ -36,9 +16,11 @@ def main():
             for word in line.split():
                 yield word
     tokens = iterate_tokens()
+    H = int(next(tokens))  # type: int
+    W = int(next(tokens))  # type: int
     A = int(next(tokens))  # type: int
     B = int(next(tokens))  # type: int
-    solve(A, B)
+    solve(H, W, A, B)
 
 if __name__ == '__main__':
     main()

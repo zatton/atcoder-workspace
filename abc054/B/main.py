@@ -6,22 +6,24 @@ NO = "No"  # type: str
 
 
 def solve(N: int, M: int, A: "List[str]", B: "List[str]"):
+    s = set()
     for i in range(N - M + 1):
         for j in range(N - M + 1):
-            ok = True
+            st = ''
             for ii in range(M):
-                for jj in range(M):
-                    if A[i + ii][j + jj] == B[ii][jj]:
-                        pass
-                    else:
-                        ok = False
-                        break
-                if not ok:
-                    break
-            if ok:
-                print(YES)
-                return
-    print(NO)
+                st += A[i + ii][j:j + M]
+            s.add(st)
+    tmp = ''
+    for i in range(M):
+        tmp += B[i]
+
+    #print(s)
+    #print(tmp)
+
+    if tmp in s:
+        print(YES)
+    else:
+        print(NO)
     return
 
 

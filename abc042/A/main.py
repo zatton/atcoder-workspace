@@ -1,31 +1,11 @@
 #!/usr/bin/env python3
 import sys
-import math
 
-def gcd(a, b):
-    if b > a:
-        a, b = b, a
-    if b == 0:
-        return a
-    return gcd(b, a % b)
+YES = "YES"  # type: str
+NO = "NO"  # type: str
 
 
-def solve(A: int, B: int):
-    g = gcd(A, B)
-    i = 2
-    last = int(math.sqrt(g))
-    s = {1}
-    while True:
-        #print(g, i)
-        if g % i == 0:
-            s.add(i)
-            g //= i
-        else:
-            i += 1
-        if i > last:
-            s.add(g)
-            break
-    print(len(s))
+def solve(A: int, B: int, C: int):
     return
 
 
@@ -38,7 +18,8 @@ def main():
     tokens = iterate_tokens()
     A = int(next(tokens))  # type: int
     B = int(next(tokens))  # type: int
-    solve(A, B)
+    C = int(next(tokens))  # type: int
+    solve(A, B, C)
 
 if __name__ == '__main__':
     main()
