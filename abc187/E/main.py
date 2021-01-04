@@ -10,7 +10,7 @@ def solve(N: int, a: "List[int]", b: "List[int]", Q: int, t: "List[int]", e: "Li
     que = [0]
     dep = [-1] * (N + 1)
     dep[0] = 0
-    print(nei)
+    #print(nei)
     while que:
         now = que.pop()
         for po in nei[now]:
@@ -25,22 +25,23 @@ def solve(N: int, a: "List[int]", b: "List[int]", Q: int, t: "List[int]", e: "Li
             A, B = B, A
             T = 1 if T == 2 else 2
         if T == 1:
-            s[B] = X
+            s[A] += X
         else:
-            s[0] = X
-            s[B] = -X
-    print(s)
-    print(dep)
+            s[0] += X
+            s[A] += -X
+        #print(T, B, s)
+    #print(s)
+    #print(dep)
     que = [0]
     ans = [0] * (N + 1)
     while que:
         now = que.pop()
+        ans[now] += s[now]
         for po in nei[now]:
             if dep[po] > dep[now]:
-                ans[po] += (ans[now] + s[now])
+                ans[po] += ans[now]
                 que.append(po)
-    for i in range(1, N + 1):
-        print(ans[i])
+    print('\n'.join(map(str, ans[1:])))
 
     return
 

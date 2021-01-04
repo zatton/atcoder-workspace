@@ -3,6 +3,26 @@ import sys
 
 
 def solve(N: int, Q: int, a: "List[int]", b: "List[int]", p: "List[int]", x: "List[int]"):
+    nei = [[] for _ in range(N)]
+    for i in range(N - 1):
+        nei[a[i] - 1].append(b[i] - 1)
+        nei[b[i] - 1].append(a[i] - 1)
+    s = [0] * N
+    for i in range(Q):
+        s[p[i] - 1] += x[i]
+    dep = [-1] * N
+    dep[0] = 0
+    que = [0]
+    ans = [0] * N
+    while que:
+        now = que.pop()
+        ans[now] += s[now]
+        for po in nei[now]:
+            if dep[po] < 0:
+                ans[po] += ans[now]
+                dep[po] = dep[now] + 1
+                que.append(po)
+    print(" ".join(map(str, ans)))
     return
 
 
