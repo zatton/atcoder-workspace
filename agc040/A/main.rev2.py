@@ -3,25 +3,15 @@ import sys
 
 
 def solve(S: str):
-    tmp = 0
-    ans = [0] * (len(S) + 1)
-    for i, s in enumerate(S):
-        if s == '<':
-            tmp += 1
-            ans[i + 1] = tmp
-        else:
-            tmp = 0
-    tmp = 0
-    #print(ans)
-    for i, s in reversed(list(enumerate(S))):
-        if s == '<':
-            tmp = 0
-        else:
-            tmp += 1
-            if ans[i] < tmp:
-                ans[i] = tmp
-    #print(ans)
-    print(sum(ans))
+    order = [0] * (len(S) + 1)
+    for idx in range(len(S)):
+        if S[idx] == '<':
+            order[idx + 1] = order[idx] + 1
+    for idx in reversed(range(len(S))):
+        if S[idx] == '>' and order[idx] < order[idx + 1] + 1:
+            order[idx] = order[idx + 1] + 1
+    ans = sum(order)
+    print(ans)
     return
 
 

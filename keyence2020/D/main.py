@@ -1,12 +1,8 @@
 #!/usr/bin/env python3
 import sys
-import math
 
 
-def solve(N: int, K: int):
-    a = N % K
-    ans = min(a, K - a)
-    print(ans)
+def solve(N: int, A: "List[int]", B: "List[int]"):
     return
 
 
@@ -18,8 +14,9 @@ def main():
                 yield word
     tokens = iterate_tokens()
     N = int(next(tokens))  # type: int
-    K = int(next(tokens))  # type: int
-    solve(N, K)
+    A = [int(next(tokens)) for _ in range(N)]  # type: "List[int]"
+    B = [int(next(tokens)) for _ in range(N)]  # type: "List[int]"
+    solve(N, A, B)
 
 if __name__ == '__main__':
     main()

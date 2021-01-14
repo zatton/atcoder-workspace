@@ -1,27 +1,11 @@
 #!/usr/bin/env python3
 import sys
 
+YES = "Yes"  # type: str
+NO = "No"  # type: str
 
-def solve(S: str):
-    tmp = 0
-    ans = [0] * (len(S) + 1)
-    for i, s in enumerate(S):
-        if s == '<':
-            tmp += 1
-            ans[i + 1] = tmp
-        else:
-            tmp = 0
-    tmp = 0
-    #print(ans)
-    for i, s in reversed(list(enumerate(S))):
-        if s == '<':
-            tmp = 0
-        else:
-            tmp += 1
-            if ans[i] < tmp:
-                ans[i] = tmp
-    #print(ans)
-    print(sum(ans))
+
+def solve(A: int, B: int, S: str):
     return
 
 
@@ -32,8 +16,10 @@ def main():
             for word in line.split():
                 yield word
     tokens = iterate_tokens()
+    A = int(next(tokens))  # type: int
+    B = int(next(tokens))  # type: int
     S = next(tokens)  # type: str
-    solve(S)
+    solve(A, B, S)
 
 if __name__ == '__main__':
     main()

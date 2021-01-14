@@ -4,8 +4,10 @@ import math
 
 
 def solve(N: int, K: int):
-    a = N % K
-    ans = min(a, K - a)
+    N = N % K
+    ans = min(N, K - N)
+    #alpha = round(N / K)
+    #ans = abs(N - K * alpha)
     print(ans)
     return
 

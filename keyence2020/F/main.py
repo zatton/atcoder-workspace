@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
 import sys
-import math
+
+MOD = 998244353  # type: int
 
 
-def solve(N: int, K: int):
-    a = N % K
-    ans = min(a, K - a)
-    print(ans)
+def solve(H: int, W: int, A: "List[str]"):
     return
 
 
@@ -17,9 +15,10 @@ def main():
             for word in line.split():
                 yield word
     tokens = iterate_tokens()
-    N = int(next(tokens))  # type: int
-    K = int(next(tokens))  # type: int
-    solve(N, K)
+    H = int(next(tokens))  # type: int
+    W = int(next(tokens))  # type: int
+    A = [next(tokens) for _ in range(H)]  # type: "List[str]"
+    solve(H, W, A)
 
 if __name__ == '__main__':
     main()
