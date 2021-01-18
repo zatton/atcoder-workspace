@@ -1,12 +1,8 @@
 #!/usr/bin/env python3
 import sys
-import math
 
 
-def solve(N: int, K: int):
-    a = N % K
-    ans = min(a, K - a)
-    print(ans)
+def solve(H: int, W: int, N: int):
     return
 
 
@@ -17,9 +13,10 @@ def main():
             for word in line.split():
                 yield word
     tokens = iterate_tokens()
+    H = int(next(tokens))  # type: int
+    W = int(next(tokens))  # type: int
     N = int(next(tokens))  # type: int
-    K = int(next(tokens))  # type: int
-    solve(N, K)
+    solve(H, W, N)
 
 if __name__ == '__main__':
     main()

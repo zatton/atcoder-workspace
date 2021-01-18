@@ -1,27 +1,24 @@
 #!/usr/bin/env python3
 import sys
 
+YES = "YES"  # type: str
+NO = "NO"  # type: str
+
 
 def solve(S: str):
-    tmp = 0
-    ans = [0] * (len(S) + 1)
-    for i, s in enumerate(S):
-        if s == '<':
-            tmp += 1
-            ans[i + 1] = tmp
+    while len(S) > 0:
+        #print(S)
+        #print(S[-6:])
+        if len(S) > 4 and S[-5:] in ["dream", "erase"]:
+            S = S[:-5]
+        elif len(S) > 5 and S[-6:] == "eraser":
+            S = S[:-6]
+        elif len(S) > 6 and S[-7:] == "dreamer":
+            S = S[:-7]
         else:
-            tmp = 0
-    tmp = 0
-    #print(ans)
-    for i, s in reversed(list(enumerate(S))):
-        if s == '<':
-            tmp = 0
-        else:
-            tmp += 1
-            if ans[i] < tmp:
-                ans[i] = tmp
-    #print(ans)
-    print(sum(ans))
+            print(NO)
+            return
+    print(YES)
     return
 
 

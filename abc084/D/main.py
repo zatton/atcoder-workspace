@@ -1,12 +1,8 @@
 #!/usr/bin/env python3
 import sys
-import math
 
 
-def solve(N: int, K: int):
-    a = N % K
-    ans = min(a, K - a)
-    print(ans)
+def solve(Q: int, l: "List[int]", r: "List[int]"):
     return
 
 
@@ -17,9 +13,13 @@ def main():
             for word in line.split():
                 yield word
     tokens = iterate_tokens()
-    N = int(next(tokens))  # type: int
-    K = int(next(tokens))  # type: int
-    solve(N, K)
+    Q = int(next(tokens))  # type: int
+    l = [int()] * (Q)  # type: "List[int]"
+    r = [int()] * (Q)  # type: "List[int]"
+    for i in range(Q):
+        l[i] = int(next(tokens))
+        r[i] = int(next(tokens))
+    solve(Q, l, r)
 
 if __name__ == '__main__':
     main()
