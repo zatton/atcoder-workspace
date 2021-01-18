@@ -2,7 +2,33 @@
 import sys
 
 
-def solve(N: int, s: "List[str]"):
+def solve(N: int, st: "List[str]"):
+    n_ab = 0
+
+    n_a = 0
+    n_b = 0
+    n_ba = 0
+    for s in st:
+        for i in range(len(s) - 1):
+            if s[i:i+2] == 'AB':
+                n_ab += 1
+        if s[0] == 'B' and s[-1] == 'A':
+            n_ba += 1
+        elif s[0] == 'B':
+            n_b += 1
+        elif s[-1] == 'A':
+            n_a += 1
+    #print(n_ab, n_ba, n_a, n_b)
+    if n_ba > 0 and not (n_a > 0 and n_b > 0):
+        if n_a == 0 and n_b == 0:
+            print(n_ab + n_ba - 1)
+        else:
+            print(n_ab + n_ba)
+    else:
+        n_a += n_ba
+        n_b += n_ba
+        #print(n_ab, n_a, n_b)
+        print(n_ab + min(n_a, n_b))
     return
 
 

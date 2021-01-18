@@ -1,8 +1,22 @@
 #!/usr/bin/env python3
 import sys
-
+import bisect
 
 def solve(n: int, a: "List[int]"):
+    a.sort()
+    #print(a)
+    ia = a[-1]
+    bidx = bisect.bisect_left(a, ia / 2)
+    if bidx == n - 1:
+        ib = a[n - 2]
+    elif bidx != 0:
+        if (a[bidx] - ia / 2) < (ia / 2 - a[bidx - 1]):
+            ib = a[bidx]
+        else:
+            ib = a[bidx - 1]
+    else:
+        ib = a[bidx]
+    print(ia, ib)
     return
 
 

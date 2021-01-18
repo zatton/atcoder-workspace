@@ -15,26 +15,17 @@ def gcd(a, b):
 def solve(N: int, A: "List[int]"):
     L = [-1] * N
     R = [-1] * N
-
     L[0] = A[0]
     R[-1] = A[-1]
-
-    for i in range(1, N):
+    for i in range(1, len(A)):
         L[i] = gcd(L[i - 1], A[i])
-    for i in range(N - 2, -1, -1):
+    for i in reversed(range(len(A) - 1)):
         R[i] = gcd(R[i + 1], A[i])
 
-    #print(L)
-    #print(R)
+    ans = max(R[1], L[-2])
 
-    ans = 0
-    for i in range(N):
-        if i == 0:
-            tmp = R[1]
-        elif i == N - 1:
-            tmp = L[N - 2]
-        else:
-            tmp = gcd(L[i - 1], R[i + 1])
+    for i in range(1, len(A) - 1):
+        tmp = gcd(L[i - 1], R[i + 1])
         if tmp > ans:
             ans = tmp
     print(ans)

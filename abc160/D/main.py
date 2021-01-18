@@ -3,6 +3,20 @@ import sys
 
 
 def solve(N: int, X: int, Y: int):
+    h = {}
+    for i in range(1, N + 1):
+        for j in range(i + 1, N + 1):
+            dis = min(j - i, abs(i - X) + abs(Y - j) + 1)
+            #print(i, j, dis)
+            if dis in h:
+                h[dis] += 1
+            else:
+                h[dis] = 1
+    for i in range(1, N):
+        if i in h:
+            print(h[i])
+        else:
+            print(0)
     return
 
 

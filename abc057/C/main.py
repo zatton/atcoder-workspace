@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
 import sys
-
+import math
 
 def solve(N: int):
+    for i in reversed(range(1, int(math.sqrt(N)) + 1)):
+        if N % i == 0:
+            a = N // i
+            ans = len(str(a))
+            print(ans)
+            return
     return
 
 

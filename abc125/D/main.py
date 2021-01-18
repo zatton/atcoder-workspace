@@ -1,8 +1,15 @@
 #!/usr/bin/env python3
 import sys
-
+import math
 
 def solve(N: int, A: "List[int]"):
+    numminus = sum(1 for a in A if a < 0)
+    absA = list(map(abs, A))
+    ans = sum(absA)
+    #print(absA, numminus, min(absA), ans)
+    if numminus % 2 != 0:
+        ans -= (min(absA) * 2)
+    print(ans)
     return
 
 

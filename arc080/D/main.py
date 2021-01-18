@@ -3,6 +3,15 @@ import sys
 
 
 def solve(H: int, W: int, N: int, a: "List[int]"):
+    cells = []
+    for i in range(N):
+        cells.extend([i + 1] * a[i])
+    for i in range(H):
+        if i % 2 == 0:
+            print(" ".join(map(str, cells[W * i:W * (i + 1)])))
+        else:
+            print(" ".join(map(str, reversed(cells[W * i:W * (i + 1)]))))
+
     return
 
 
