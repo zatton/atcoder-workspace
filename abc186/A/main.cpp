@@ -26,25 +26,8 @@ ll myceil(ll a,ll b){return (a+(b-1))/b;}
 ll myfloor(ll a,ll b){return a/b;}
 
 
-void solve(long long N, long long H, std::vector<long long> a, std::vector<long long> b){
-  priority_queue<pair<ll, int> > que; // bが0, aが1
-  FORA(i, a) que.push(make_pair(i, 0));
-  FORA(i, b) que.push(make_pair(i, 1));
-  ll hp = H;
-  ll ans = 0;
-  while(hp > 0) {
-    auto tmp = que.top();
-    //cout << tmp.first << endl;
-    if (tmp.second == 1) {
-      que.pop();
-      hp -= tmp.first;
-      ans ++;
-    } else {
-      ans += myceil(hp, tmp.first);
-      break;
-    }
-  }
-  cout << ans << endl;
+void solve(long long N, long long W){
+  cout << N / W << endl;;
 }
 
 signed main(){
@@ -56,14 +39,8 @@ signed main(){
 
   long long N;
   scanf("%lld",&N);
-  long long H;
-  scanf("%lld",&H);
-  std::vector<long long> a(N);
-  std::vector<long long> b(N);
-  for(ll i = 0 ; i < N ; i++){
-    scanf("%lld",&a[i]);
-    scanf("%lld",&b[i]);
-  }
-  solve(N, H, std::move(a), std::move(b));
+  long long W;
+  scanf("%lld",&W);
+  solve(N, W);
   return 0;
 }
