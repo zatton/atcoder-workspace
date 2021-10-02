@@ -23,7 +23,21 @@ typedef long long ll;
 
 
 void solve(long long K, long long A, long long B){
-
+  ll i = 1;
+  ll A10 = 0;
+  ll B10 = 0;
+  while (1) {
+    A10 += i * (A % 10);
+    B10 += i * (B % 10);
+    i *= K;
+    A /= 10;
+    B /= 10;
+    if (A == 0 && B == 0) {
+      break;
+    }
+  }
+  cout << A10 * B10 << endl;
+  return;
 }
 
 signed main(){

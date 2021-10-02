@@ -21,25 +21,6 @@ typedef long long ll;
 //出力(空白区切りで昇順に)
 #define coutALL(x) {for(auto i=x.begin();i!=--x.end();i++)cout<<*i<<" ";cout<<*--x.end()<<endl;}
 
-const long long MOD = 998244353;
-
-void solve(long long N, std::vector<long long> A){
-  vector<vector<ll>> dp(N, vector<ll>(10, 0));
-  dp[0][A[0]] = 1;
-  FOR(i, 1, N - 2) REP(j, 10) {
-    cout << i << ' ' << j << endl;
-    ll tmp = (A[i] + dp[i][j]) % 10;
-    cout << tmp << endl;
-    dp[i + 1][tmp] += 1;
-
-    tmp = (A[i] * dp[i][j]) % 10;
-    cout << tmp << endl;
-    dp[i + 1][tmp] += 1;
-  }
-  coutALL(dp[N - 1]);
-  return;
-}
-
 signed main(){
   //小数の桁数の出力指定
   cout<<fixed<<setprecision(10);
@@ -47,12 +28,32 @@ signed main(){
   ios::sync_with_stdio(false); // stringの時はコメントアウト
   cin.tie(nullptr);
 
-  long long N;
-  scanf("%lld",&N);
-  std::vector<long long> A(N);
-  for(ll i = 0 ; i < N ; i++){
-    scanf("%lld",&A[i]);
+  string S, T;
+  cin >> S >> T;
+
+  int ok = 0;
+  REP(i, S.length()) {
+    if (S[i] != T[i]) {
+      if (ok) {
+        cout << "No" << endl;
+        return 0;
+      }
+      if (i == S.length() - 1) {
+        cout << "No" << endl;
+        return 0;
+      }
+      if (S[i] == T[i + 1] && T[i] == S[i + 1]) {
+        S[i] = T[i];
+        S[i + 1] = T[i + 1];
+        ok = 1;
+        continue;
+      }
+      cout << "No" << endl;
+      return 0;
+    }
   }
-  solve(N, std::move(A));
+  cout << "Yes" << endl;
+
   return 0;
 }
+

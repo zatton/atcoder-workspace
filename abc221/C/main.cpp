@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <string>
 using namespace std;
 typedef long long ll;
 
@@ -21,29 +22,10 @@ typedef long long ll;
 //出力(空白区切りで昇順に)
 #define coutALL(x) {for(auto i=x.begin();i!=--x.end();i++)cout<<*i<<" ";cout<<*--x.end()<<endl;}
 
+template<class T>bool chmax(T &a, const T &b) { if (a<b) { a=b; return 1; } return 0; }
 
-void solve(long long N, std::vector<long long> A, long long X){
-  vector<ll> Asum(N);
-  REP(i, N) {
-    if (i == 0) {
-      Asum[i] = A[i];
-    } else {
-      Asum[i] = Asum[i - 1] + A[i];
-    }
-  }
-  ll ans = N * (X / Asum[N - 1]);
-  X -= (X / Asum[N - 1]) * Asum[N - 1];
-
-  if (X < 0) {
-    cout << ans << endl;
-    return;
-  }
-
-  //二分探索
-  auto iter = upper_bound(ALL(Asum), X);
-  ans += distance(Asum.begin(), iter) + 1;
-  cout << ans << endl;
-  return;
+int ctoi(char c) {
+  return int(c - '0');
 }
 
 signed main(){
@@ -53,14 +35,58 @@ signed main(){
   ios::sync_with_stdio(false); // stringの時はコメントアウト
   cin.tie(nullptr);
 
-  long long N;
-  scanf("%lld",&N);
-  std::vector<long long> A(N);
-  for(ll i = 0 ; i < N ; i++){
-    scanf("%lld",&A[i]);
+  string N;
+  cin >> N;
+
+  ll ans = 0;
+
+  REP(i, pow(2, N.size())) { // O(2^N)
+    //cout << endl << i << endl;
+    vector<int> a;
+    vector<int> b;
+    REP(j, N.size()) { // O(1)
+      //cout << j << endl;
+      //cout << (i >> j) << endl;
+      //cout << N[j] << endl << endl;;
+      //cout << endl;
+
+      if ((i >> j) & 1) {
+        a.push_back(ctoi(N[j]));
+      } else {
+        b.push_back(ctoi(N[j]));
+      }
+    }
+
+    if (a.size() == 0 || b.size() == 0) {
+      continue;
+    }
+
+    sort(ALL(a));
+    sort(ALL(b));
+
+    if (a[a.size() - 1] == 0 || b[b.size() - 1] == 0) {
+      continue;
+    }
+
+    ll A = 0, B = 0;
+
+    ll tmp = 1;
+    REP(j, a.size()) {
+      A += tmp * a[j];
+      tmp *= 10;
+    }
+
+    tmp = 1;
+    REP(j, b.size()) {
+      B += tmp * b[j];
+      tmp *= 10;
+    }
+
+    chmax(ans, A * B);
   }
-  long long X;
-  scanf("%lld",&X);
-  solve(N, std::move(A), X);
+
+  cout << ans << endl;
+
   return 0;
 }
+

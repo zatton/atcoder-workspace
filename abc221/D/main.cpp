@@ -20,39 +20,56 @@ typedef long long ll;
 #define S second
 //出力(空白区切りで昇順に)
 #define coutALL(x) {for(auto i=x.begin();i!=--x.end();i++)cout<<*i<<" ";cout<<*--x.end()<<endl;}
+template<class T>bool chmax(T &a, const T &b) { if (a<b) { a=b; return 1; } return 0; }
 
-const long long MOD = 998244353;
-
-void solve(long long N, std::vector<long long> A){
-  vector<vector<ll>> dp(N, vector<ll>(10, 0));
-  dp[0][A[0]] = 1;
-  FOR(i, 1, N - 2) REP(j, 10) {
-    cout << i << ' ' << j << endl;
-    ll tmp = (A[i] + dp[i][j]) % 10;
-    cout << tmp << endl;
-    dp[i + 1][tmp] += 1;
-
-    tmp = (A[i] * dp[i][j]) % 10;
-    cout << tmp << endl;
-    dp[i + 1][tmp] += 1;
-  }
-  coutALL(dp[N - 1]);
-  return;
-}
 
 signed main(){
-  //小数の桁数の出力指定
-  cout<<fixed<<setprecision(10);
-  //入力の高速化用のコード
-  ios::sync_with_stdio(false); // stringの時はコメントアウト
-  cin.tie(nullptr);
 
-  long long N;
-  scanf("%lld",&N);
-  std::vector<long long> A(N);
-  for(ll i = 0 ; i < N ; i++){
-    scanf("%lld",&A[i]);
+  ll N;
+  cin >> N;
+
+  vector<ll> A(N);
+  vector<ll> B(N);
+
+  //cout << "ok" << endl;
+
+  REP(i, N) cin >> A[i] >> B[i];
+
+  map<ll, ll> tmp;
+  ll max_day = 0;
+
+  REP(i, N) {
+
+    if (tmp.count(A[i]) > 0) {
+      tmp[A[i]] += 1;
+    } else {
+      tmp[A[i]] = 1;
+    }
+    if (tmp.count(A[i] + B[i]) > 0) {
+      tmp[A[i] + B[i]] -= 1;
+    } else {
+      tmp[A[i] + B[i]] = -1;
+    }
+  //cout << tmp[1] << tmp[2] << tmp[3] << tmp[4] << tmp[5] << endl;
   }
-  solve(N, std::move(A));
+
+  vector<ll> ans(N, 0);
+
+  ll st = 1;
+  ll now = 0;
+  FORA(i, tmp) {
+    ll day = i.first;
+    ll diff = i.second;
+    if (now > 0) {
+      ans[now - 1] += day - st;
+    }
+    //cout << diff << endl;
+    now += diff;
+    st = day;
+  }
+
+  coutALL(ans);
+
   return 0;
 }
+

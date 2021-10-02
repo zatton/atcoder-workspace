@@ -21,23 +21,9 @@ typedef long long ll;
 //出力(空白区切りで昇順に)
 #define coutALL(x) {for(auto i=x.begin();i!=--x.end();i++)cout<<*i<<" ";cout<<*--x.end()<<endl;}
 
-const long long MOD = 998244353;
 
-void solve(long long N, std::vector<long long> A){
-  vector<vector<ll>> dp(N, vector<ll>(10, 0));
-  dp[0][A[0]] = 1;
-  FOR(i, 1, N - 2) REP(j, 10) {
-    cout << i << ' ' << j << endl;
-    ll tmp = (A[i] + dp[i][j]) % 10;
-    cout << tmp << endl;
-    dp[i + 1][tmp] += 1;
+void solve(long long N, long long M, long long Q, std::vector<long long> u, std::vector<long long> v, std::vector<long long> x){
 
-    tmp = (A[i] * dp[i][j]) % 10;
-    cout << tmp << endl;
-    dp[i + 1][tmp] += 1;
-  }
-  coutALL(dp[N - 1]);
-  return;
 }
 
 signed main(){
@@ -49,10 +35,20 @@ signed main(){
 
   long long N;
   scanf("%lld",&N);
-  std::vector<long long> A(N);
-  for(ll i = 0 ; i < N ; i++){
-    scanf("%lld",&A[i]);
+  long long M;
+  scanf("%lld",&M);
+  long long Q;
+  scanf("%lld",&Q);
+  std::vector<long long> u(M);
+  std::vector<long long> v(M);
+  for(ll i = 0 ; i < M ; i++){
+    scanf("%lld",&u[i]);
+    scanf("%lld",&v[i]);
   }
-  solve(N, std::move(A));
+  std::vector<long long> x(Q);
+  for(ll i = 0 ; i < Q ; i++){
+    scanf("%lld",&x[i]);
+  }
+  solve(N, M, Q, std::move(u), std::move(v), std::move(x));
   return 0;
 }

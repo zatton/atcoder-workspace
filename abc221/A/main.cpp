@@ -21,23 +21,8 @@ typedef long long ll;
 //出力(空白区切りで昇順に)
 #define coutALL(x) {for(auto i=x.begin();i!=--x.end();i++)cout<<*i<<" ";cout<<*--x.end()<<endl;}
 
-const long long MOD = 998244353;
+void solve(){
 
-void solve(long long N, std::vector<long long> A){
-  vector<vector<ll>> dp(N, vector<ll>(10, 0));
-  dp[0][A[0]] = 1;
-  FOR(i, 1, N - 2) REP(j, 10) {
-    cout << i << ' ' << j << endl;
-    ll tmp = (A[i] + dp[i][j]) % 10;
-    cout << tmp << endl;
-    dp[i + 1][tmp] += 1;
-
-    tmp = (A[i] * dp[i][j]) % 10;
-    cout << tmp << endl;
-    dp[i + 1][tmp] += 1;
-  }
-  coutALL(dp[N - 1]);
-  return;
 }
 
 signed main(){
@@ -47,12 +32,11 @@ signed main(){
   ios::sync_with_stdio(false); // stringの時はコメントアウト
   cin.tie(nullptr);
 
-  long long N;
-  scanf("%lld",&N);
-  std::vector<long long> A(N);
-  for(ll i = 0 ; i < N ; i++){
-    scanf("%lld",&A[i]);
-  }
-  solve(N, std::move(A));
+  ll A, B;
+  cin >> A >> B;
+
+  cout << ll(pow(32, (A - B))) << endl;;
+
   return 0;
 }
+

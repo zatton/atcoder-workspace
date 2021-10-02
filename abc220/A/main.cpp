@@ -23,7 +23,18 @@ typedef long long ll;
 
 
 void solve(long long A, long long B, long long C){
-
+  if (A / C == B / C) {
+    if (A % C == 0) {
+      cout << A << endl;
+      return;
+    } else if (B % C == 0) {
+      cout << B << endl;
+      return;
+    }
+    cout << -1 << endl;
+    return;
+  }
+  cout << (A / C + 1) * C << endl;
 }
 
 signed main(){
