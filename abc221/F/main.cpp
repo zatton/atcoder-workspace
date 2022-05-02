@@ -19,28 +19,12 @@ typedef long long ll;
 #define F first
 #define S second
 //出力(空白区切りで昇順に)
-#define coutALL(x) {for(auto q=x.begin();q!=--x.end();q++)cout<<*q<<endl;cout<<*--x.end()<<endl;}
+#define coutALL(x) {for(auto i=x.begin();i!=--x.end();i++)cout<<*i<<" ";cout<<*--x.end()<<endl;}
 
 const long long MOD = 998244353;
 
-void solve(long long N, std::vector<long long> A){
-  vector<vector<ll>> dp(N, vector<ll>(10, 0));
-  dp[0][A[0]] = 1;
-  FOR(i, 1, N - 1) REP(j, 10) {
-    //cout << i << ' ' << j << endl;
+void solve(long long N, std::vector<long long> U, std::vector<long long> V){
 
-    ll tmp = (A[i] + j) % 10;
-    //cout << tmp << endl;
-    dp[i][tmp] = (dp[i][tmp] + dp[i - 1][j]) % MOD;
-
-    tmp = (A[i] * j) % 10;
-    //cout << tmp << endl;
-    dp[i][tmp] = (dp[i][tmp] + dp[i - 1][j]) % MOD;
-
-    //coutALL(dp[i]);
-  }
-  coutALL(dp[N - 1]);
-  return;
 }
 
 signed main(){
@@ -52,10 +36,12 @@ signed main(){
 
   long long N;
   scanf("%lld",&N);
-  std::vector<long long> A(N);
-  for(ll i = 0 ; i < N ; i++){
-    scanf("%lld",&A[i]);
+  std::vector<long long> U(N-1);
+  std::vector<long long> V(N-1);
+  for(ll i = 0 ; i < N-1 ; i++){
+    scanf("%lld",&U[i]);
+    scanf("%lld",&V[i]);
   }
-  solve(N, std::move(A));
+  solve(N, std::move(U), std::move(V));
   return 0;
 }

@@ -21,25 +21,14 @@ typedef long long ll;
 //出力(空白区切りで昇順に)
 #define coutALL(x) {for(auto i=x.begin();i!=--x.end();i++)cout<<*i<<" ";cout<<*--x.end()<<endl;}
 
-const long long MOD = 998244353;
-
-void solve(long long N, std::vector<long long> A){
-
-}
 
 signed main(){
-  //小数の桁数の出力指定
-  cout<<fixed<<setprecision(10);
-  //入力の高速化用のコード
-  ios::sync_with_stdio(false); // stringの時はコメントアウト
-  cin.tie(nullptr);
+  ll N;
+  cin >> N;
 
-  long long N;
-  scanf("%lld",&N);
-  std::vector<long long> A(N);
-  for(ll i = 0 ; i < N ; i++){
-    scanf("%lld",&A[i]);
-  }
-  solve(N, std::move(A));
+  vector<ll> A(N);
+  REP(i, N) cin >> A[i];
+
   return 0;
 }
+
