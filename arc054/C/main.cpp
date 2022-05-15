@@ -14,13 +14,12 @@ typedef long long ll;
 //#define MOD 1000000007
 #define F first
 #define S second
-//#define debug(var)                                                             \
-//  do {                                                                         \
-//    cout << #var << " : ";                                                     \
-//    view(var);                                                                 \
-//  } while (0)
 #define debug(var)                                                             \
-  {}
+  do {                                                                         \
+    cout << #var << " : ";                                                     \
+    view(var);                                                                 \
+  } while (0)
+//#define debug(var) {}
 template <typename T> void view(T e) { cout << e << endl; }
 template <typename T1, typename T2> void view(const pair<T1, T2> &v) {
   cout << v.F << ' ' << v.S << endl;
@@ -40,36 +39,5 @@ template <typename T> void view(const vector<vector<T>> &vv) {
 signed main() {
   ll n;
   cin >> n;
-  vector<ll> A(n);
-  REP(i, n) cin >> A[i];
-
-  vector<vector<ll>> dp(n);
-  REP(i, n) REP(j, 2) dp[i].push_back(0);
-
-  // A0を使用
-  dp[0][0] = INF32;
-  dp[0][1] = A[0];
-  FOR(i, 1, n - 1) {
-    dp[i][0] = dp[i - 1][1];
-    dp[i][1] = min(dp[i - 1][1] + A[i], dp[i - 1][0] + A[i]);
-  }
-  debug(dp);
-
-  ll ans = min(dp[n - 1][0], dp[n - 1][1]);
-
-  REP(i, n) REP(j, 2) dp[i][j] = 0;
-
-  // A0を使用しない
-  dp[0][0] = 0;
-  dp[0][1] = INF32;
-  FOR(i, 1, n - 1) {
-    dp[i][0] = dp[i - 1][1];
-    dp[i][1] = min(dp[i - 1][1] + A[i], dp[i - 1][0] + A[i]);
-  }
-  debug(dp);
-  ans = min(ans, dp[n - 1][1]);
-
-  cout << ans << endl;
-
   return 0;
 }

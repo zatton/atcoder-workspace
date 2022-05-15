@@ -43,31 +43,44 @@ signed main() {
   vector<ll> A(n);
   REP(i, n) cin >> A[i];
 
-  vector<vector<ll>> dp(n);
-  REP(i, n) REP(j, 2) dp[i].push_back(0);
-
-  // A0を使用
-  dp[0][0] = INF32;
-  dp[0][1] = A[0];
-  FOR(i, 1, n - 1) {
-    dp[i][0] = dp[i - 1][1];
-    dp[i][1] = min(dp[i - 1][1] + A[i], dp[i - 1][0] + A[i]);
+  if (n % 2 == 0) {
+    ll ans1 = 0, ans2 = 0;
+    REP(i, n / 2) ans1 += A[2 * i];
+    REP(i, n / 2) ans2 += A[2 * i + 1];
+    cout << min(ans1, ans2) << endl;
+    return 0;
   }
-  debug(dp);
 
-  ll ans = min(dp[n - 1][0], dp[n - 1][1]);
+  // 0番目重複
+  ll ans = 0;
+  REP(i, n / 2) ans += A[2 * i];
+  ans += A[n - 1];
 
-  REP(i, n) REP(j, 2) dp[i][j] = 0;
+  ll tmp = ans;
+  debug(tmp);
 
-  // A0を使用しない
-  dp[0][0] = 0;
-  dp[0][1] = INF32;
-  FOR(i, 1, n - 1) {
-    dp[i][0] = dp[i - 1][1];
-    dp[i][1] = min(dp[i - 1][1] + A[i], dp[i - 1][0] + A[i]);
+  // i番目重複 (偶数)
+  for (ll i = 2; i < n; i += 2) {
+    tmp -= A[i - 2];
+    debug(tmp);
+    tmp += A[i - 1];
+    debug(tmp);
+    ans = min(ans, tmp);
   }
-  debug(dp);
-  ans = min(ans, dp[n - 1][1]);
+
+  // 1番目重複
+  tmp = 0;
+  REP(i, n / 2) tmp += A[2 * i + 1];
+  tmp += A[0];
+  debug(tmp);
+
+  // i番目重複 (偶数)
+  for (ll i = 3; i < n; i += 2) {
+    tmp -= A[i - 2];
+    tmp += A[i - 1];
+    debug(tmp);
+    ans = min(ans, tmp);
+  }
 
   cout << ans << endl;
 
